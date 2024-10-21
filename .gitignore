@@ -24,3 +24,6 @@ ex_cron-*.tar
 
 # Temporary files, for example, from tests.
 /tmp/
+
+# Name of the executable
+ex_cron

@@ -1,18 +1,9 @@
 defmodule ExCron do
   @moduledoc """
-  Documentation for `ExCron`.
+  @TODO: fill this out
   """
 
-  @doc """
-  Hello world.
-
-  ## Examples
-
-      iex> ExCron.hello()
-      :world
-
-  """
-  def hello do
-    :world
+  def main(args \\ []) do
+    IO.puts args
   end
 end
