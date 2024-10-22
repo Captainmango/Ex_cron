@@ -20,4 +20,12 @@ defmodule Parser.RulesTest do
   test "It can parse a list argument" do
     assert Parser.Rules.evaluate_rule("1,5") == Common.RulesTypes.list
   end
+
+  test "It raises an error if the input is incorrect" do
+    assert_raise(
+      ArgumentError,
+      "Incorrect argument passed. Must be a valid operator with applicable terms",
+      Parser.Rules.evaluate_rule("wwww")
+    )
+  end
 end
