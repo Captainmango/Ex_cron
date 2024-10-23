@@ -9,18 +9,24 @@ defmodule Parser.RulesTest do
     @expected input
     @actual result
 
-    test "Can handle #{@description} with input #{@expected}" do
+    test "Returns #{@description} rule with input #{@expected}" do
       assert Parser.Tokeniser.run("#{@expected}") == @actual
     end
   end
 
-  test "It raises an error if the input is incorrect" do
-    assert_raise(
-      ArgumentError,
-      "Incorrect argument passed. Must be a valid operator with applicable terms",
-      fn ->
-        Parser.Tokeniser.run("wwww")
-      end
-    )
+  for {input} <- [
+    {"t"}
+  ] do
+    @input input
+
+    test "It raises an error if input is #{@input}" do
+      assert_raise(
+        ArgumentError,
+        "Incorrect argument passed. Must be a valid operator with applicable terms",
+        fn ->
+          Parser.Tokeniser.run(@input)
+        end
+      )
+    end
   end
 end
