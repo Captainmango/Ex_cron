@@ -1,4 +1,4 @@
-defmodule Common.RulesTypes do
+defmodule Parser.RuleTypes do
   @spec wildcard() :: :wildcard
   def wildcard, do: :wildcard
   @spec range() :: :range
