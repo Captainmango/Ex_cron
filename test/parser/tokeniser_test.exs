@@ -1,5 +1,5 @@
 defmodule Parser.RulesTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: true
 
   for {tc, input, result} <- [
     {"wildcard", "*", {Parser.RuleTypes.wildcard}},
@@ -15,7 +15,10 @@ defmodule Parser.RulesTest do
   end
 
   for {input} <- [
-    {"t"}
+    {"t"},
+    {"a-b"},
+    {"*/ttt"},
+    {"1,f"}
   ] do
     @input input
 
