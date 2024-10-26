@@ -4,6 +4,6 @@ defmodule ExCron do
   """
 
   def main(args \\ []) do
-    IO.puts args
+    IO.puts(args)
   end
 end

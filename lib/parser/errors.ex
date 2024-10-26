@@ -4,7 +4,9 @@ defmodule Errors do
 
     @impl true
     def exception(_val) do
-      %RunError{message: "Incorrect argument passed. Must be a valid operator with applicable terms"}
+      %RunError{
+        message: "Incorrect argument passed. Must be a valid operator with applicable terms"
+      }
     end
   end
 end
