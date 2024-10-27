@@ -39,4 +39,18 @@ defmodule Parser.EvaluatorTest do
       end
     )
   end
+
+  test "it can evaluate a cron" do
+    input = %Cron{
+      minutes: "1",
+      hours: "1",
+      day_of_month: "1",
+      month: "1",
+      day_of_week: "1",
+    }
+
+    res = Parser.Evaluator.run_for_cron(input)
+
+    assert ParsedCron.format(res) == "minutes      | 1\nhours        | 1\nday_of_month | 1\nmonth        | 1\nday_of_week  | 1\n"
+  end
 end

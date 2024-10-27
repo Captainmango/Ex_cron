@@ -1,23 +1,12 @@
 defmodule Parser.Evaluator do
-  @type cron_fragment
-    :: {:list, integer(), integer()}
-    | {:single_num, integer()}
-    | {:divisor, integer()}
-    | {:wildcard}
-    | {:range, integer(), integer()}
-
-  @type interval
-    :: :minutes
-    | :hours
-    | :day_of_month
-    | :month
-    | :day_of_week
+  alias Parser.Intervals.Ranges, as: R
+  alias Parser.Tokeniser, as: T
 
   defguardp is_in_range(num, start, final) when num >= start and num <= final
 
-  @spec run(cf::cron_fragment(), i::interval()) :: list()
+  @spec run(cf::T.cron_fragment(), i::R.interval()) :: list()
   def run(cf, i) do
-    range = Parser.Intervals.Ranges.get(i)
+    range = R.get(i)
 
     start = hd(range)
     last_num = List.last(range)
@@ -36,5 +25,16 @@ defmodule Parser.Evaluator do
       _
         -> raise Parser.Errors.EvaluateError
     end
+  end
+
+  @spec run_for_cron(Cron.t()) :: ParsedCron.t()
+  def run_for_cron(c) do
+    %ParsedCron {
+      minutes: run(T.run(c.minutes), Parser.Intervals.minutes()),
+      hours: run(T.run(c.hours), Parser.Intervals.hours()),
+      day_of_month: run(T.run(c.day_of_month), Parser.Intervals.day_of_month()),
+      month: run(T.run(c.month), Parser.Intervals.month),
+      day_of_week: run(T.run(c.day_of_week), Parser.Intervals.day_of_week())
+    }
   end
 end

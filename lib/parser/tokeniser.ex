@@ -1,6 +1,14 @@
 defmodule Parser.Tokeniser do
   defguardp is_correct_size(t) when is_binary(t) and byte_size(t) in [1, 2]
 
+  @type cron_fragment
+  :: {:list, integer(), integer()}
+  | {:single_num, integer()}
+  | {:divisor, integer()}
+  | {:wildcard}
+  | {:range, integer(), integer()}
+
+  @spec run(binary()) :: cron_fragment()
   def run(<<"*">>) do
     {Parser.RuleTypes.wildcard()}
   end
