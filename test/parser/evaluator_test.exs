@@ -30,4 +30,13 @@ defmodule Parser.EvaluatorTest do
 
     assert res == [2]
   end
+
+  test "it errors if num outside of range" do
+    assert_raise(
+      Parser.Errors.EvaluateError,
+      fn ->
+        Parser.Evaluator.run({:single_num, 999}, :day_of_week)
+      end
+    )
+  end
 end
