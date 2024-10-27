@@ -8,14 +8,15 @@ defmodule ExCron.MixProject do
       elixir: "~> 1.17",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      escript: escript()
+      escript: escript(),
     ]
   end
 
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger],
+      mod: {ExCron, []}
     ]
   end
 
@@ -24,11 +25,12 @@ defmodule ExCron.MixProject do
     [
       # {:dep_from_hexpm, "~> 0.3.0"},
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
-      {:credo, "~> 1.7", only: [:dev, :test], runtime: false}
+      {:credo, "~> 1.7", only: [:dev, :test], runtime: false},
+      {:plug_cowboy, "~> 2.7.2"}
     ]
   end
 
-  defp escript do
-    [main_module: CronParser.ExCron]
+  defp escript() do
+    [main_module: ExCron]
   end
 end
