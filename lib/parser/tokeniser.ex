@@ -52,14 +52,14 @@ defmodule Parser.Tokeniser do
   end
 
   def run(_) do
-    raise Errors.RunError
+    raise Parser.Errors.TokeniseError
   end
 
   defp handle_number_conversion(n) do
     try do
       String.to_integer(n)
     rescue
-      _e -> reraise(Errors.RunError, __STACKTRACE__)
+      e -> reraise(Parser.Errors.TokeniseError, [exception: e], __STACKTRACE__)
     end
   end
 end

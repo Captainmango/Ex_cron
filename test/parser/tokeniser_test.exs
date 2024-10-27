@@ -9,7 +9,9 @@ defmodule Parser.RulesTest do
         {"divisor", "*/5", {Parser.RuleTypes.divisor(), 5}},
         {"divisor two digits", "*/15", {Parser.RuleTypes.divisor(), 15}},
         {"list", "1,5", {Parser.RuleTypes.list(), 1, 5}},
-        {"list two digits", "10,5", {Parser.RuleTypes.list(), 10, 5}}
+        {"list two digits", "10,5", {Parser.RuleTypes.list(), 10, 5}},
+        {"single", "1", {Parser.RuleTypes.single_num(), 1}},
+        {"single tow digits", "15", {Parser.RuleTypes.single_num(), 15}},
       ] do
     @description tc
     @expected input
@@ -30,7 +32,7 @@ defmodule Parser.RulesTest do
 
     test "It raises an error if input is #{@input}" do
       assert_raise(
-        Errors.RunError,
+        Parser.Errors.TokeniseError,
         "Incorrect argument passed. Must be a valid operator with applicable terms",
         fn ->
           Parser.Tokeniser.run(@input)
