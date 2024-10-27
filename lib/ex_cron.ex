@@ -10,17 +10,10 @@ defmodule ExCron do
   end
 
   def main(args \\ []) do
-    run_mode = System.get_env("MODE", "CLI")
+    {_, input, errors} = OptionParser.parse(args, [strict: []])
 
-    case run_mode do
-      "WEB" -> Supervisor.start_link(@children, @opts)
-      "CLI"
-        -> {_, input, errors} = OptionParser.parse(args, [strict: []])
+    if [] != errors, do: IO.puts(inspect(errors))
 
-        if [] != errors, do: IO.puts(inspect(errors))
-
-        IO.puts(inspect(input))
-    end
-
+    IO.puts(inspect(input))
   end
 end
