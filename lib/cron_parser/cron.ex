@@ -9,7 +9,7 @@ defmodule CronParser.ParsedCron do
     day_of_week: list(),
   }
 
-  @spec format(c::ParsedCron.t()) :: String.t()
+  @spec format(c::__MODULE__.t()) :: String.t()
   def format(c) do
     """
     minutes      | #{Enum.join(c.minutes, ",")}
