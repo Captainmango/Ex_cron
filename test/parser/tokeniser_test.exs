@@ -1,4 +1,4 @@
-defmodule Parser.RulesTest do
+defmodule Parser.TokeniserTest do
   use ExUnit.Case, async: true
 
   for {tc, input, result} <- [
