@@ -1,6 +1,8 @@
-defmodule Parser.Evaluator do
-  alias Parser.Intervals.Ranges, as: R
-  alias Parser.Tokeniser, as: T
+defmodule CronParser.Parser.Evaluator do
+  alias CronParser.Parser.Intervals.Ranges, as: R
+  alias CronParser.Parser.Tokeniser, as: T
+  alias CronParser.{Cron, ParsedCron}
+  alias CronParser.Parser.Errors, as: Errors
 
   defguardp is_in_range(num, start, final) when num >= start and num <= final
 
@@ -23,18 +25,18 @@ defmodule Parser.Evaluator do
       {:single_num, n} when is_in_range(n, start, last_num)
         -> [n]
       _
-        -> raise Parser.Errors.EvaluateError
+        -> raise Errors.EvaluateError
     end
   end
 
   @spec run_for_cron(Cron.t()) :: ParsedCron.t()
   def run_for_cron(c) do
-    %ParsedCron {
-      minutes: run(T.run(c.minutes), Parser.Intervals.minutes()),
-      hours: run(T.run(c.hours), Parser.Intervals.hours()),
-      day_of_month: run(T.run(c.day_of_month), Parser.Intervals.day_of_month()),
-      month: run(T.run(c.month), Parser.Intervals.month),
-      day_of_week: run(T.run(c.day_of_week), Parser.Intervals.day_of_week())
+    %CronParser.ParsedCron {
+      minutes: run(T.run(c.minutes), CronParser.Parser.Intervals.minutes()),
+      hours: run(T.run(c.hours), CronParser.Parser.Intervals.hours()),
+      day_of_month: run(T.run(c.day_of_month), CronParser.Parser.Intervals.day_of_month()),
+      month: run(T.run(c.month), CronParser.Parser.Intervals.month),
+      day_of_week: run(T.run(c.day_of_week), CronParser.Parser.Intervals.day_of_week())
     }
   end
 end

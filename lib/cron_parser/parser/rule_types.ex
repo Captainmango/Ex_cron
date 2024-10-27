@@ -1,4 +1,4 @@
-defmodule Parser.RuleTypes do
+defmodule CronParser.Parser.RuleTypes do
   @spec wildcard() :: :wildcard
   def wildcard, do: :wildcard
   @spec range() :: :range

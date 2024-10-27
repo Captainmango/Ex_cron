@@ -1,4 +1,4 @@
-defmodule Parser.Errors do
+defmodule CronParser.Parser.Errors do
   defmodule TokeniseError do
     defexception [:message]
 

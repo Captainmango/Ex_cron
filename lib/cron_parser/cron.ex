@@ -1,4 +1,4 @@
-defmodule ParsedCron do
+defmodule CronParser.ParsedCron do
   defstruct [:minutes, :hours, :day_of_month, :month, :day_of_week]
 
   @type t :: %__MODULE__{
@@ -21,7 +21,7 @@ defmodule ParsedCron do
   end
 end
 
-defmodule Cron do
+defmodule CronParser.Cron do
   defstruct [:minutes, :hours, :day_of_month, :month, :day_of_week]
 
   @type t :: %__MODULE__{

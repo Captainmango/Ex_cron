@@ -1,4 +1,4 @@
-defmodule Parser.Intervals do
+defmodule CronParser.Parser.Intervals do
   def minutes(), do: :minutes
   def hours(), do: :hours
   def day_of_month(), do: :day_of_month
@@ -6,7 +6,7 @@ defmodule Parser.Intervals do
   def day_of_week(), do: :day_of_week
 end
 
-defmodule Parser.Intervals.Ranges do
+defmodule CronParser.Parser.Intervals.Ranges do
   @type interval
     :: :minutes
     | :hours
