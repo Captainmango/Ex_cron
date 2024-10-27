@@ -29,6 +29,6 @@ defmodule ExCron.MixProject do
   end
 
   defp escript do
-    [main_module: ExCron]
+    [main_module: CronParser.ExCron]
   end
 end
